@@ -11,7 +11,7 @@ export type CreateOneParams<T> = BaseParam & { values: Omit<T, 'id'>, overrideID
 export type UpdateParams<T> = BaseParam & { id: DataKeyType, values: Partial<T> }
 export type DeleteOneParams = BaseParam & { id: DataKeyType }
 
-export type IDataProvider = {
+export type DataProvider = {
     getList: <T>(params: GetListPrams) => Promise<T[]>
     getMany: <T>(params: GetManyParams) => Promise<T[]>
     getOne: <T>(params: GetOneParams) => Promise<T | null>

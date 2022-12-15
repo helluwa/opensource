@@ -1,14 +1,10 @@
-import { BaseParam, CreateOneParams, DeleteOneParams, GetListPrams, GetManyParams, GetOneParams, IDataProvider, UpdateParams } from "../types/base"
+import { BaseParam, CreateOneParams, DeleteOneParams, GetListPrams, GetManyParams, GetOneParams, DataProvider, UpdateParams } from "../types/base"
 import { Redis } from "@upstash/redis";
 import { generateUUID4 } from '@helluwa/utils'
 
-export class UpstashDataProvider implements IDataProvider {
+export class UpstashDataProvider implements DataProvider {
 
-    private redis: Redis
-
-    constructor({ url, token }: { url: string, token: string }) {
-        this.redis = new Redis({ url, token })
-    }
+    constructor(private redis: Redis) { }
 
     async getList<T>({ model }: GetListPrams): Promise<T[]> {
         return new Promise<Promise<T[]>>(async (resolve) => {
@@ -66,4 +62,9 @@ export class UpstashDataProvider implements IDataProvider {
             })
         })
     }
+}
+
+
+export const createUpstashProvider = (redis: Redis) => {
+    return new UpstashDataProvider(redis)
 }
