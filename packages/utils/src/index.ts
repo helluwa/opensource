@@ -1,3 +1,3 @@
-import { generateUUID4 } from "./lib/uuid";
+import UUID from "./lib/uuid";
 
-export { generateUUID4 }
+export { UUID }

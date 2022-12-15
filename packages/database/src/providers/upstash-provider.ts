@@ -1,6 +1,6 @@
 import { BaseParam, CreateOneParams, DeleteOneParams, GetListPrams, GetManyParams, GetOneParams, DataProvider, UpdateParams } from "../types/base"
 import { Redis } from "@upstash/redis";
-import { generateUUID4 } from '@helluwa/utils'
+import { UUID } from '@helluwa/utils'
 
 export class UpstashDataProvider implements DataProvider {
 
@@ -32,7 +32,7 @@ export class UpstashDataProvider implements DataProvider {
 
     async create<T>({ model, values, overrideID }: CreateOneParams<T>): Promise<T & { id: string }> {
         return new Promise<T & { id: string }>(async (resolve) => {
-            const id = overrideID ? overrideID : generateUUID4()
+            const id = overrideID ? overrideID : UUID.generateUUID4()
             await this.redis.hset(model, { [id]: { id, ...values } })
             const data = { id, ...values } as T & { id: string }
             resolve(data)
