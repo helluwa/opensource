@@ -1,5 +1,7 @@
 import { DataProvider } from "@helluwa/database"
-import { EmailProviderConfig } from "./email.provider"
+import { EmailProviderConfig } from "./email.type"
+
+
 
 export enum Model {
     Organization = 'organizations',
@@ -8,7 +10,7 @@ export enum Model {
 }
 
 export type KaipullaCoreOptions = {
-    db : DataProvider,    
+    db: DataProvider,
     encryption_key: string
 }
 
@@ -48,10 +50,8 @@ export type EncryptedProfile = {
 }
 
 export type Profile = {
-    emailProviderConfig: EmailProviderConfig  
+  //  emailProviderConfig: EmailProviderConfig
 }
-
-// type Conditional<T> = { [K in keyof T]: { provider: K; providerConfig: T[K] } }[keyof T]
 
 export type User = {
     id: string
