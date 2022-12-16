@@ -6,4 +6,5 @@ export const initDatabase = (provider: DataProvider): Required<DataProvider> => 
 }
 
 export { createUpstashProvider }
+export type {DataProvider}
 
