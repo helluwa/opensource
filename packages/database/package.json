@@ -1,7 +1,7 @@
 {
   "name": "@helluwa/database",
   "description": "Abstraction layer for database providers.",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
@@ -42,7 +42,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "@helluwa/utils": "^0.0.1-alpha.1"
+    "@helluwa/utils": "^0.0.1-alpha.2"
   },
   "gitHead": "b1fc732adf777b10d8026800fd9b5e83c5db298b"
 }
