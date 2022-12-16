@@ -1,38 +1,29 @@
-import { DataProvider } from "@helluwa/database";
-import { hash } from "bcrypt";
 import HttpError from 'http-errors'
 import { isNil } from 'lodash'
 import { AuthenticationResultType, EncryptedProfile, ExtendedRequest, KaipullaCoreOptions, Model, Profile } from "../types/base.type";
 import { decrypt, getHashString } from "./encryption";
 
-
-
 export class Auth {
 
     constructor(private kaipullaCoreOptions: KaipullaCoreOptions) { }
 
-    public getBearerTokenFromHeader(request: ExtendedRequest) {
-        if (request.headers && request.headers.authorization) {
-            const splitedAuthorization = request.headers.authorization.split(/\s+/)
-
-            if (splitedAuthorization[0].toLowerCase() !== 'bearer' || splitedAuthorization.length !== 2) {
-                return null;
-            }
-
-            return splitedAuthorization[1]
-        } else {
+    public async authenticateByAuthorizationHeaderString(authorizationString: string): Promise<AuthenticationResultType> {
+        if (!authorizationString) {
             throw new HttpError.Forbidden('Bearer token not found | Forbidden Access')
         }
+        const result = await this._authenticate(this._getToken(authorizationString))
+        return result
     }
 
-    public async authenticate(request: ExtendedRequest) {
+    public async authenticateByRequest(request: any): Promise<AuthenticationResultType> {
+        const req = request as ExtendedRequest
+        const token = this._getToken(req.headers.authorization)
+        const result = await this._authenticate(token)
+        return result
+    }
+
+    private async _authenticate(bearerToken: string) {
         return new Promise<AuthenticationResultType>(async (resolve) => {
-
-            const bearerToken = this.getBearerTokenFromHeader(request)
-
-            if (!bearerToken) {
-                return { authenticated: false }
-            }
 
             const hashedBearerToken = getHashString(bearerToken, this.kaipullaCoreOptions.encryption_key)
 
@@ -60,5 +51,15 @@ export class Auth {
                 resolve({ authenticated: false, profile: null })
             }
         })
+    }
+
+    private _getToken(bearerToken: string): string {
+        const splitedAuthorization = bearerToken.split(/\s+/)
+
+        if (splitedAuthorization[0].toLowerCase() !== 'bearer' || splitedAuthorization.length !== 2) {
+            throw new HttpError.Forbidden('Bearer token not found | Forbidden Access')
+        }
+
+        return splitedAuthorization[1]
     }
 }

@@ -89,6 +89,7 @@ importers:
 
   packages/remix-kaipulla:
     specifiers:
+      '@helluwa/kaipulla-core': '*'
       '@remix-run/dev': ^1.8.2
       '@remix-run/eslint-config': ^1.8.2
       '@remix-run/node': ^1.8.2
@@ -96,15 +97,18 @@ importers:
       '@remix-run/serve': ^1.8.2
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.8
+      '@upstash/redis': ^1.18.1
       eslint: ^8.27.0
       isbot: ^3.6.5
       react: ^18.2.0
       react-dom: ^18.2.0
       typescript: ^4.8.4
     dependencies:
+      '@helluwa/kaipulla-core': link:../kaipulla-core
       '@remix-run/node': 1.8.2_biqbaboplfbrettd7655fr4n2y
       '@remix-run/react': 1.8.2_biqbaboplfbrettd7655fr4n2y
       '@remix-run/serve': 1.8.2_biqbaboplfbrettd7655fr4n2y
+      '@upstash/redis': 1.18.1
       isbot: 3.6.5
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
