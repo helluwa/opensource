@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "database",
         "utils",
-        "kaipulla-core"
+        "kaipulla-core",
+        "provider"
     ]
 }

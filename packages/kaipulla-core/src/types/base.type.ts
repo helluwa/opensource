@@ -25,7 +25,7 @@ export type ExtendedRequest = Omit<Request, 'headers'> & {
 
 export type AuthenticationResultType = {
     authenticated: boolean
-    profile: Profile | null
+    profile: ProfileType | null
     error?: any
 }
 
@@ -38,10 +38,10 @@ export type Organization = {
     postalcode: number
     country: string
     phone: string
-    encrypted_profile: EncryptedProfile[]
+    encrypted_profile: EncryptedProfileType[]
 }
 
-export type EncryptedProfile = {
+export type EncryptedProfileType = {
     id: string
     data: string
     label?: string
@@ -49,11 +49,11 @@ export type EncryptedProfile = {
     lastUsedAt?: Date
 }
 
-export type Profile = {
+export type ProfileType = {
   //  emailProviderConfig: EmailProviderConfig
 }
 
-export type User = {
+export type UserType = {
     id: string
     firstname: string
     lastname: string
@@ -62,5 +62,10 @@ export type User = {
 
 export type LoginCredentials = {
     email: string
+    password: string
+}
+
+
+export type UserWtihPasswordType = UserType & {
     password: string
 }

@@ -1,6 +1,7 @@
 import HttpError from 'http-errors'
 import { isNil } from 'lodash'
-import { AuthenticationResultType, EncryptedProfile, ExtendedRequest, KaipullaCoreOptions, Model, Profile } from "../types/base.type";
+import { AuthenticationResultType, EncryptedProfileType, ExtendedRequest, KaipullaCoreOptions, ProfileType } from "../types/base.type";
+import { MODEL_KEY } from '../types/model.type';
 import { decrypt, getHashString } from "./encryption";
 
 export class Auth {
@@ -27,11 +28,11 @@ export class Auth {
 
             const hashedBearerToken = getHashString(bearerToken, this.kaipullaCoreOptions.encryption_key)
 
-            const encryptedProfile = await this.kaipullaCoreOptions.db.getOne<EncryptedProfile>({ model: Model.SecureProfile, id: hashedBearerToken })
+            const encryptedProfile = await this.kaipullaCoreOptions.db.getOne<EncryptedProfileType, MODEL_KEY>({ model: 'secure-profiles', id: hashedBearerToken })
 
             if (encryptedProfile?.data) {
                 const decryptedDataString = decrypt(encryptedProfile.data, this.kaipullaCoreOptions.encryption_key)
-                const profile = JSON.parse(decryptedDataString) as Profile
+                const profile = JSON.parse(decryptedDataString) as ProfileType
 
                 const now = new Date()
 
@@ -44,7 +45,7 @@ export class Auth {
                 }
 
                 //  Last use timestamp
-                await this.kaipullaCoreOptions.db.update<EncryptedProfile>({ model: Model.SecureProfile, id: hashedBearerToken, values: { lastUsedAt: now } })
+                await this.kaipullaCoreOptions.db.update<EncryptedProfileType, MODEL_KEY>({ model: 'secure-profiles', id: hashedBearerToken, values: { lastUsedAt: now } })
 
                 resolve({ authenticated: true, profile })
             } else {

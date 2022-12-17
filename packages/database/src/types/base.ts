@@ -1,22 +1,22 @@
 export type DataKeyType = string | number
 
-export type BaseParam = {
-    model: string
+export type BaseParam<M> = {
+    model: M
 }
 
-export type GetListPrams = BaseParam
-export type GetManyParams = BaseParam & { ids: DataKeyType[] }
-export type GetOneParams = BaseParam & { id: DataKeyType }
-export type CreateOneParams<T> = BaseParam & { values: Omit<T, 'id'>, overrideID?: string }
-export type UpdateParams<T> = BaseParam & { id: DataKeyType, values: Partial<T> }
-export type DeleteOneParams = BaseParam & { id: DataKeyType }
+export type GetListPrams<M> = BaseParam<M>
+export type GetManyParams<M> = BaseParam<M> & { ids: DataKeyType[] }
+export type GetOneParams<M> = BaseParam<M> & { id: DataKeyType }
+export type CreateOneParams<T,M> = BaseParam<M> & { values: Omit<T, 'id'>, overrideID?: string }
+export type UpdateParams<T,M> = BaseParam<M> & { id: DataKeyType, values: Partial<T> }
+export type DeleteOneParams<M> = BaseParam<M> & { id: DataKeyType }
 
 export type DataProvider = {
-    getList: <T>(params: GetListPrams) => Promise<T[]>
-    getMany: <T>(params: GetManyParams) => Promise<T[]>
-    getOne: <T>(params: GetOneParams) => Promise<T | null>
-    create: <T>(params: CreateOneParams<T>) => Promise<T & { id: string }>
-    update: <T>(params: UpdateParams<T>) => Promise<T | null>
-    deleteOne: (params: DeleteOneParams) => Promise<boolean>
-    count: (params: BaseParam) => Promise<number>
+    getList: <T,M extends string>(params: GetListPrams<M>) => Promise<T[]>
+    getMany: <T, M extends string>(params: GetManyParams<M>) => Promise<T[]>
+    getOne: <T,M extends string>(params: GetOneParams<M>) => Promise<T | null>
+    create: <T, M extends string>(params: CreateOneParams<T, M>) => Promise<T & { id: string }>
+    update: <T, M extends string>(params: UpdateParams<T,M>) => Promise<T | null>
+    deleteOne: <M extends string>(params: DeleteOneParams<M>) => Promise<boolean>
+    count: <M extends string>(params: BaseParam<M>) => Promise<number>
 }

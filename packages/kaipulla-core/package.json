@@ -49,6 +49,7 @@
   "dependencies": {
     "@helluwa/database": "*",
     "@helluwa/providers":"*",
+    "@helluwa/utils": "*",
     "bcrypt": "^5.1.0",
     "crypto-js": "^4.1.1",
     "http-errors": "^2.0.0",
