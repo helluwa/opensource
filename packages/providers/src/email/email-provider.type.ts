@@ -8,8 +8,14 @@ export type SendMailOptions = {
     bcc?: string
 }
 
+export type EmailProviderServiceResult = {
+    success: boolean
+    error?: any
+    data?: any
+}
+
 export interface IEmailProvider {
-    send: () => void
+    send: () => Promise<EmailProviderServiceResult>
 }
 
 export type EMAIL_BASE_CONFIG = {

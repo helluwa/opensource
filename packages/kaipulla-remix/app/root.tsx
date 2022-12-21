@@ -38,12 +38,14 @@ export default function App() {
               <Links />
             </head>
             <body style={{ margin: 0 }}>
-              <NGProgress
-                isAnimating={
-                  transition.state === "loading" ||
-                  transition.state === "submitting"
-                }
-              />
+              <div style={{zIndex:1000}}>
+                <NGProgress
+                  isAnimating={
+                    transition.state === "loading" ||
+                    transition.state === "submitting"
+                  }
+                />
+              </div>
               <Outlet />
               <ScrollRestoration />
               <Scripts />

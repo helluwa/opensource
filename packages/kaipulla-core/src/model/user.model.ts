@@ -2,7 +2,7 @@ import { LoginCredentials, UserType, UserWtihPasswordType } from "../types/base.
 import { MODEL_KEY, MODEL_OPTIONS } from "../types/model.type";
 import { BaseModel } from "./base.model";
 import { DatabaseError } from '@helluwa/utils'
-import { comparePassword, getSaltedPassword } from "../authentication/encryption";
+import { comparePassword, getSaltedPassword } from "../helpers/encryption";
 
 export class UserModel extends BaseModel {
     constructor(modelOptions: MODEL_OPTIONS) {

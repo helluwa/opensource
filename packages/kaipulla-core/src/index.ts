@@ -1,5 +1,5 @@
 import { KaipullaCore } from "./kaipulla.core";
-import { ExtendedRequest, KaipullaCoreOptions } from "./types/base.type";
+import { ExtendedRequest, KaipullaCoreOptions, ProfileType, UserType } from "./types/base.type";
 import { initDatabase, createUpstashProvider } from '@helluwa/database'
 
 export {
@@ -10,5 +10,7 @@ export {
 
 export type {
     KaipullaCoreOptions,
-    ExtendedRequest
+    ExtendedRequest,
+    ProfileType,
+    UserType
 }

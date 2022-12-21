@@ -2,13 +2,13 @@ import HttpError from 'http-errors'
 import { isNil } from 'lodash'
 import { AuthenticationResultType, EncryptedProfileType, ExtendedRequest, KaipullaCoreOptions, ProfileType } from "../types/base.type";
 import { MODEL_KEY } from '../types/model.type';
-import { decrypt, getHashString } from "./encryption";
+import { decrypt, getHashString } from "../helpers/encryption";
 
 export class Auth {
 
     constructor(private kaipullaCoreOptions: KaipullaCoreOptions) { }
 
-    public async authenticateByAuthorizationHeaderString(authorizationString: string): Promise<AuthenticationResultType> {
+    public async authenticateByAuthorizationHeaderString(authorizationString?: string | null): Promise<AuthenticationResultType> {
         if (!authorizationString) {
             throw new HttpError.Forbidden('Bearer token not found | Forbidden Access')
         }
