@@ -41,7 +41,7 @@ export type Organization = {
 }
 
 export type ProfileBase = {
-    id: string
+    id?: string
     label?: string
     description?: string
     expiresAt?: Date
