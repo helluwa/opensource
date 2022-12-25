@@ -1,3 +1,3 @@
 import { kaipulla } from "~/kaipulla.server";
 
-export const action = kaipulla.remixActionHandler
+export const action = kaipulla.handler.remixActionHandler

@@ -1,5 +1,4 @@
 import { NestedDashboardLayout } from "~/components/layout/NestedDashboard"
-import { Logo } from "~/components/mariappan-logo"
 import { navItems } from "~/data/navitems"
 
 export default function Index() {
@@ -13,9 +12,6 @@ export default function Index() {
         }}
       >
         <div style={{ minHeight: "5vh" }}>Dashboard</div>
-        <div style={{width:150, height:75}}>
-          <Logo />
-        </div>
       </NestedDashboardLayout>
     </div>
   )
